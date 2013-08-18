@@ -1,4 +1,4 @@
-#lang dracula/kernel
+#lang refined-acl2/kernel
 
 (provide
   component
@@ -16,9 +16,9 @@
 (require
   (for-syntax
     mischief)
-  dracula/prelude/core/keywords
-  dracula/prelude/core/support
-  dracula/prelude/core/imported)
+  refined-acl2/prelude/core/keywords
+  refined-acl2/prelude/core/support
+  refined-acl2/prelude/core/imported)
 
 (define-shorthand (define-simple name:id term:expr)
   (define-values {name} term))

@@ -5,7 +5,7 @@
   alpha-rule-classes=?)
 
 (require
-  dracula/expansion/grammar)
+  refined-acl2/expansion/grammar)
 
 (define (alpha-rule-classes=? ones twos table)
   (alpha-list=? alpha-rule-class=? ones twos table))

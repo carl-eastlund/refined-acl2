@@ -28,7 +28,7 @@
   make-nil
   portcullis-events
   portcullis-non-events
-  dracula-package-imports
+  refined-acl2-package-imports
   acl2/c
   acl2-alpha/c
   standard-char?
@@ -1259,7 +1259,7 @@
     USE-VALUE Y-OR-N-P USER-HOMEDIR-PATHNAME
     YES-OR-NO-P VALUES ZEROP])
 
-(define dracula-package-imports
+(define refined-acl2-package-imports
   (remove* '[T NIL]
     (remove-duplicates
       (append

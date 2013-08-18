@@ -1,4 +1,4 @@
-#lang dracula/kernel
+#lang refined-acl2/kernel
 
 (provide
   implement-description
@@ -7,13 +7,13 @@
 
 (require/provide
   (for-syntax
-    dracula/prelude/core/expansion))
+    refined-acl2/prelude/core/expansion))
 
 (require
   (for-syntax
     mischief)
-  dracula/prelude/core/keywords
-  dracula/prelude/core/imported)
+  refined-acl2/prelude/core/keywords
+  refined-acl2/prelude/core/imported)
 
 (begin-for-syntax
 

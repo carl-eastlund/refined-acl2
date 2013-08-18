@@ -30,8 +30,8 @@
       files)))
 
 (require
-  dracula/proof/dynamic
-  dracula/expansion/paths
+  refined-acl2/proof/dynamic
+  refined-acl2/expansion/paths
   syntax/modcode
   racket/date)
 
@@ -149,7 +149,7 @@
         command))
 
     (define script-file
-      (make-temporary-file "dracula-certify-script~a.lisp"))
+      (make-temporary-file "refined-acl2-certify-script~a.lisp"))
 
     (call-with-output-file script-file
       #:exists 'truncate/replace

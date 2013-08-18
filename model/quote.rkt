@@ -7,8 +7,8 @@
   quote-shape-map)
 
 (require
-  dracula/model/data
-  dracula/proof/term
+  refined-acl2/model/data
+  refined-acl2/proof/term
   mischief/preserve-expensive-metadata)
 
 (define (quote-proof prog)

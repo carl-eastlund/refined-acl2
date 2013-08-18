@@ -125,7 +125,7 @@
 (require
   (for-syntax
     mischief)
-  dracula/proof/term
+  refined-acl2/proof/term
   unstable/list)
 
 (struct ast [source] #:transparent)

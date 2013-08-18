@@ -1,4 +1,4 @@
-#lang dracula/kernel
+#lang refined-acl2/kernel
 
 (provide
   declare-values
@@ -7,7 +7,7 @@
   where)
 
 (require
-  dracula/prelude/core/imported)
+  refined-acl2/prelude/core/imported)
 
 (begin-for-syntax
   (define (declaration-transformer stx)

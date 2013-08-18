@@ -1,4 +1,4 @@
-#lang dracula/kernel
+#lang refined-acl2/kernel
 
 (provide
   description
@@ -7,8 +7,8 @@
 (require
   (for-syntax
     mischief)
-  dracula/prelude/core/keywords
-  dracula/prelude/core/support)
+  refined-acl2/prelude/core/keywords
+  refined-acl2/prelude/core/support)
 
 (define-syntax (description stx)
   (syntax-parse stx

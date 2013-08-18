@@ -13,22 +13,22 @@
      (set! use-gui? #false)]
     #:args {}
     (if use-gui?
-      ((dynamic-require 'rackunit/gui 'test/gui) #:wait? #true dracula-tests)
-      (exit ((dynamic-require 'rackunit/text-ui 'run-tests) dracula-tests)))))
+      ((dynamic-require 'rackunit/gui 'test/gui) #:wait? #true refined-acl2-tests)
+      (exit ((dynamic-require 'rackunit/text-ui 'run-tests) refined-acl2-tests)))))
 
 (module+ test
   (require rackunit/text-ui)
-  (run-tests dracula-tests))
+  (run-tests refined-acl2-tests))
 
 (require
   rackunit
-  dracula/tests/suite/atomic
-  dracula/tests/suite/modular
-  dracula/tests/suite/component
-  dracula/tests/suite/macro
-  dracula/tests/suite/surface)
+  refined-acl2/tests/suite/atomic
+  refined-acl2/tests/suite/modular
+  refined-acl2/tests/suite/component
+  refined-acl2/tests/suite/macro
+  refined-acl2/tests/suite/surface)
 
-(define dracula-tests
+(define refined-acl2-tests
   (test-suite "Dracula"
     surface-tests
     #|macro-tests|#

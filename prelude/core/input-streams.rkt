@@ -25,7 +25,7 @@
     [equal?-stream equal-inputs]
     [constant-stream constant-inputs]))
 
-(require dracula/proof/term)
+(require refined-acl2/proof/term)
 
 (define (constant-stream x)
   (define-stream the-stream

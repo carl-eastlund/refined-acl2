@@ -1,12 +1,12 @@
-#lang dracula/core
+#lang refined-acl2/core
 
 (provide
   (all-defined-out))
 
 (require
   (for-syntax
-    dracula/proof/term)
-  dracula/prelude/base/primitive)
+    refined-acl2/proof/term)
+  refined-acl2/prelude/base/primitive)
 
 (fold-shorthand (or e:expr ... e0:expr)
   (let {[disjunct e]} (if disjunct disjunct e0))

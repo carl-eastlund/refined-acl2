@@ -1,7 +1,7 @@
 #lang mischief
 
 (require
-  dracula/legacy/type/base)
+  refined-acl2/legacy/type/base)
 
 (struct function-type type [arity primitive] #:transparent)
 

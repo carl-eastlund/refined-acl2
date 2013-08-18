@@ -5,17 +5,17 @@
 (require
   rackunit
   mischief/preserve-expensive-metadata
-  dracula/tests/harness)
+  refined-acl2/tests/harness)
 
 (define surface-tests
   (test-suite "surface syntax"
 
-    (test-dracula #:name 'prelude-only
-      #:lang 'dracula/base
+    (test-refined-acl2 #:name 'prelude-only
+      #:lang 'refined-acl2/base
       #:proof prelude-proof)
 
-    (test-dracula #:name 'export-and-evaluate
-      #:lang 'dracula/base
+    (test-refined-acl2 #:name 'export-and-evaluate
+      #:lang 'refined-acl2/base
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define x "ecks")
@@ -30,8 +30,8 @@
       `[,@prelude-proof
         (,DEFUN X () (,QUOTE "ecks"))])
 
-    (test-dracula #:name 'recursive-list-length
-      #:lang 'dracula/base
+    (test-refined-acl2 #:name 'recursive-list-length
+      #:lang 'refined-acl2/base
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define (len x)
@@ -50,8 +50,8 @@
                 (,QUOTE "all clauses failed")
                 (,QUOTE ,EMPTY)))))])
 
-    (test-dracula #:name 'macro-in-description
-      #:lang 'dracula/base
+    (test-refined-acl2 #:name 'macro-in-description
+      #:lang 'refined-acl2/base
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(description D
@@ -75,8 +75,8 @@
         (,DEFSTUB C.ONE (,*) ,=> ,*)
         (,DEFSTUB C.BOTH (,* ,*) ,=> ,*)])
 
-    (test-dracula #:name 'macro-from-generic
-      #:lang 'dracula/base
+    (test-refined-acl2 #:name 'macro-from-generic
+      #:lang 'refined-acl2/base
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(description ADD
@@ -105,8 +105,8 @@
           (ADD-NUMBER.ADD (,QUOTE 1)
             (ADD-NUMBER.ADD (,QUOTE 2) (,QUOTE 3))))])
 
-    (test-dracula #:name 'binary-generic
-      #:lang 'dracula/base
+    (test-refined-acl2 #:name 'binary-generic
+      #:lang 'refined-acl2/base
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(description UNARY
@@ -134,8 +134,8 @@
         (,DEFSTUB IDENTITY.OP (,*) ,=> ,*)
         (,DEFSTUB IDEMPOTENT.OP (,*) ,=> ,*)])
 
-    (test-dracula #:name 'generics-with-where-clauses
-      #:lang 'dracula/base
+    (test-refined-acl2 #:name 'generics-with-where-clauses
+      #:lang 'refined-acl2/base
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(description ONE (~define x))

@@ -8,13 +8,13 @@
     [all-modules-with-proofs (-> (listof module-name?))]))
 
 (require
-  dracula/legacy/check
-  dracula/legacy/type
-  dracula/legacy/proof
-  dracula/legacy/registry
-  dracula/expansion/names
-  dracula/proof/term
-  dracula/expansion/paths
+  refined-acl2/legacy/check
+  refined-acl2/legacy/type
+  refined-acl2/legacy/proof
+  refined-acl2/legacy/registry
+  refined-acl2/expansion/names
+  refined-acl2/proof/term
+  refined-acl2/expansion/paths
   macro-debugger/emit
   (for-template
     mischief))

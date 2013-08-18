@@ -9,9 +9,9 @@
   proof-dependencies)
 
 (require
-  dracula/proof/term
-  dracula/model
-  dracula/expansion/paths)
+  refined-acl2/proof/term
+  refined-acl2/model
+  refined-acl2/expansion/paths)
 
 (define (writable-proof-obligations)
   (for/hash

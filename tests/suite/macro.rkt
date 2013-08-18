@@ -5,14 +5,14 @@
 (require
   rackunit
   mischief/preserve-expensive-metadata
-  dracula/tests/harness
+  refined-acl2/tests/harness
   syntax/modread)
 
 (define macro-tests
   (test-suite "obsolete macro tests"
 
-    (test-dracula #:name 'macro-in-description
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'macro-in-description
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-description D {}
@@ -52,8 +52,8 @@
                (C_F (,QUOTE ,T)
                  (C_X0)))))])
 
-    (test-dracula/syntax-error #:name 'label-for-nonexistent-definition
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'label-for-nonexistent-definition
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-description Empty {[some-label-name an-absent-name]})])
@@ -62,8 +62,8 @@
         #px"Empty"
         #px"an-absent-name"])
 
-    (test-dracula/syntax-error #:name 'rename-to-nonexistent-name
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'rename-to-nonexistent-name
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-description One-Value {}
@@ -74,8 +74,8 @@
       '[#px"an-absent-name"
         #px"one-value"])
 
-    (test-dracula/syntax-error #:name 'rename-to-external-name
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'rename-to-external-name
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-value an-external-value '1)
@@ -87,8 +87,8 @@
       '[#px"an-external-value"
         #px"one-value"])
 
-    (test-dracula/syntax-error #:name 'rename-nonexistent-label
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'rename-nonexistent-label
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-description Empty {})
@@ -100,8 +100,8 @@
         #px"Empty"
         #px"empty"])
 
-    (test-dracula/syntax-error #:name 'refine-nonexistent-label
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'refine-nonexistent-label
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-value some-external-name '1)
@@ -113,8 +113,8 @@
       '[#px"an-absent-label"
         #px"Empty"])
 
-    (test-dracula #:name 'generate-temporary
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'generate-temporary
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-metafunction phantom
@@ -133,8 +133,8 @@
            (,DEFUN COMP2_PHANTOM ()
               (,QUOTE phantom)))])
 
-    (test-dracula #:name 'mixing-marks
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'mixing-marks
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-metafunction phantom
@@ -161,8 +161,8 @@
            (,DEFUN COMP2_Y ()
               (,QUOTE why)))])
 
-    (test-dracula #:name 'mixing-marks-twice
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'mixing-marks-twice
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-metafunction double-phantom
@@ -193,8 +193,8 @@
            (,DEFUN COMP2_Y ()
               (,QUOTE why)))])
 
-    (test-dracula #:name 'mixing-marks/explicit-labels
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'mixing-marks/explicit-labels
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-metafunction phantom
@@ -221,8 +221,8 @@
            (,DEFUN COMP2_Y ()
               (,QUOTE why)))])
 
-    (test-dracula #:name 'mixing-marks-twice/explicit-labels
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'mixing-marks-twice/explicit-labels
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-metafunction double-phantom
@@ -253,8 +253,8 @@
            (,DEFUN COMP2_Y ()
               (,QUOTE why)))])
 
-    (test-dracula #:name 'desc/comp-with-differing-marks
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'desc/comp-with-differing-marks
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-metafunction make-desc
@@ -282,8 +282,8 @@
         (,DEFSTUB COMP2_X () #s(:: ACL2 =>) ,*)
         (,DEFUN Y () (COMP2_X))])
 
-    (test-dracula #:name 'desc/comp-with-unrelated-marks
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'desc/comp-with-unrelated-marks
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-metafunction macro
@@ -307,8 +307,8 @@
                  (,QUOTE ,NIL))))
         (,DEFSTUB COMP2_X () #s(:: ACL2 =>) ,*)])
 
-    (test-dracula #:name 'labels-should-ignore-bindings
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'labels-should-ignore-bindings
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-description desc {}
@@ -335,14 +335,14 @@
       (check-not-exn
         (lambda ()
           (define expected
-            '(module anonymous-module dracula
+            '(module anonymous-module refined-acl2
                (#%module-begin
                  (deref a b)
                  (deref (deref c d) e)
                  (1 2 (deref (deref x y) z)))))
           (define text
             (string-append
-              "#lang dracula\n"
+              "#lang refined-acl2\n"
               "a_b\n"
               "c_d_e\n"
               "(1 2 (deref x_y z))\n"))

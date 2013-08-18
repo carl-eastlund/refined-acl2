@@ -9,12 +9,12 @@
   proof-dependencies)
 
 (require
-  dracula/model/data
-  dracula/model/parse
-  dracula/model/quote
-  dracula/model/verify
-  dracula/model/acl2
-  dracula/expansion/simplify
+  refined-acl2/model/data
+  refined-acl2/model/parse
+  refined-acl2/model/quote
+  refined-acl2/model/verify
+  refined-acl2/model/acl2
+  refined-acl2/expansion/simplify
   mischief/preserve-expensive-metadata)
 
 (define (all-proof-obligations)

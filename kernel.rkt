@@ -1,13 +1,13 @@
 #lang mischief
 
-(module reader syntax/module-reader dracula/kernel)
+(module reader syntax/module-reader refined-acl2/kernel)
 
 (provide
 
   ;; Phase 0
   (rename-out
     [#%top-interaction #%top-interaction]
-    [#%dracula-module-begin #%module-begin]
+    [#%refined-acl2-module-begin #%module-begin]
     [#%plain-app #%app]
     [#%datum #%datum]
     [#%top #%top])
@@ -61,14 +61,14 @@
   require/provide)
 
 (require/provide
-  dracula/expansion/runtime
+  refined-acl2/expansion/runtime
   (for-syntax
     mischief))
 
 (require
   (for-syntax
-    dracula/expansion/simplify
-    dracula/model
+    refined-acl2/expansion/simplify
+    refined-acl2/model
     macro-debugger/emit))
 
 (begin-for-syntax
@@ -101,5 +101,5 @@
              (emit-remark "expanded Racket -> annotated Racket" stx3 stx4)
              stx4])])])))
 
-(define-syntax #%dracula-module-begin
+(define-syntax #%refined-acl2-module-begin
   expand-module-begin)

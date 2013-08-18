@@ -5,15 +5,15 @@
 (require
   rackunit
   mischief/preserve-expensive-metadata
-  dracula/tests/harness)
+  refined-acl2/tests/harness)
 
 (define modular-tests
   (test-suite "modules"
 
     (test-suite "provider and client modules"
 
-      (test-dracula #:name 'provider
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'provider
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(#%require (only racket/base +))
@@ -44,8 +44,8 @@
           (,DEFUN ONE () (,QUOTE 1))
           (,DEFUN INC (X) (,BINARY-+ X (ONE)))])
 
-      (test-dracula #:name 'requirer
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'requirer
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(#%require 'provider (only racket/base cons))
@@ -77,8 +77,8 @@
           (,DEFUN ONE (X)
             (,CONS X (,QUOTE ,EMPTY)))])
 
-      (test-dracula #:name 'all-but-z
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'all-but-z
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(define-values {x}
@@ -95,8 +95,8 @@
           (,DEFUN Y () (,QUOTE 2))
           (,DEFUN Z () (,QUOTE 3))])
 
-      (test-dracula #:name 'x-y-and-z
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'x-y-and-z
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(#%require (only 'all-but-z x y) (rename 'all-but-z z x))
@@ -121,11 +121,11 @@
 
     (test-suite "empty + import"
 
-      (test-dracula #:name 'empty-module
-        #:lang 'dracula/kernel)
+      (test-refined-acl2 #:name 'empty-module
+        #:lang 'refined-acl2/kernel)
 
-      (test-dracula #:name 'import-empty
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'import-empty
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(#%require 'empty-module)])
@@ -137,8 +137,8 @@
 
     (test-suite "cross-module macros"
 
-      (test-dracula #:name 'macro-provider
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'macro-provider
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(define-syntaxes {private}
@@ -150,8 +150,8 @@
            (#%provide quoth)])
         #:exports '[])
 
-      (test-dracula #:name 'macro-consumer
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'macro-consumer
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(#%require 'macro-provider)
@@ -168,8 +168,8 @@
 
     (test-suite "cross-module higher order macro"
 
-      (test-dracula #:name 'higher-order-macro-provider
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'higher-order-macro-provider
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(define-syntaxes {define-associative}
@@ -195,8 +195,8 @@
                 (,QUOTE 1)
                 (,QUOTE 2))))])
 
-      (test-dracula #:name 'higher-order-macro-consumer
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'higher-order-macro-consumer
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(#%require 'higher-order-macro-provider)
@@ -221,8 +221,8 @@
 
     (test-suite "literals + import"
 
-      (test-dracula #:name 'module-with-literals
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'module-with-literals
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(define-syntaxes {same}
@@ -234,8 +234,8 @@
            (#%provide same)])
         #:results '(#true #false))
 
-      (test-dracula #:name 'cross-module-literals
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'cross-module-literals
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(#%require 'module-with-literals)
@@ -250,8 +250,8 @@
 
     (test-suite "cross-module primitives"
 
-      (test-dracula #:name 'primitive-provider
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'primitive-provider
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(#%require (only racket/base boolean?))
@@ -267,8 +267,8 @@
               (,BOOLEANP
                 (,QUOTE 1))))])
 
-      (test-dracula #:name 'primitive-requirer
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'primitive-requirer
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(#%require 'primitive-provider)
@@ -285,8 +285,8 @@
 
     (test-suite "diamond modules"
 
-      (test-dracula #:name 'DiamondA
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'DiamondA
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(define-values {A}
@@ -296,8 +296,8 @@
         #:proof
         `[(,DEFUN A () (,QUOTE 1))])
 
-      (test-dracula #:name 'DiamondB
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'DiamondB
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(#%require 'DiamondA)
@@ -314,8 +314,8 @@
             (,DEFUN A () (,QUOTE 1)))
           (,DEFUN B () (A))])
 
-      (test-dracula #:name 'DiamondC
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'DiamondC
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(#%require 'DiamondA)
@@ -332,8 +332,8 @@
             (,DEFUN A () (,QUOTE 1)))
           (,DEFUN C () (A))])
 
-      (test-dracula #:name 'DiamondD
-        #:lang 'dracula/kernel
+      (test-refined-acl2 #:name 'DiamondD
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(#%require 'DiamondB 'DiamondC)

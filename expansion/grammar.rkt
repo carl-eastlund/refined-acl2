@@ -5,7 +5,7 @@
     mischief)
   (for-template
     racket/base
-    dracula/expansion/runtime))
+    refined-acl2/expansion/runtime))
 
 (provide defn not-defn)
 

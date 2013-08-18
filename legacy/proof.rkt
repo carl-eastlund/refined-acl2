@@ -5,15 +5,15 @@
   program-consequences)
 
 (require
-  dracula/legacy/type
-  dracula/expansion/grammar
-  dracula/legacy/registry
-  dracula/legacy/unique
-  dracula/legacy/ref
-  dracula/legacy/rename
-  dracula/expansion/dependency
-  dracula/proof/term
-  dracula/expansion/paths)
+  refined-acl2/legacy/type
+  refined-acl2/expansion/grammar
+  refined-acl2/legacy/registry
+  refined-acl2/legacy/unique
+  refined-acl2/legacy/ref
+  refined-acl2/legacy/rename
+  refined-acl2/expansion/dependency
+  refined-acl2/proof/term
+  refined-acl2/expansion/paths)
 
 (define (program-obligations stxs)
   (define deps (all-dependencies))

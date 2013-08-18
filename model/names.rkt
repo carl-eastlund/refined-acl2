@@ -17,7 +17,7 @@
   sort-decls)
 
 (require
-  dracula/model/data)
+  refined-acl2/model/data)
 
 (define (program-bindings x) (set->list (program-binding-set x)))
 (define (defns-bindings x) (set->list (multiple defn-binding-set x)))

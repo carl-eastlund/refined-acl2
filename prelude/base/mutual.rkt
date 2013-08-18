@@ -1,15 +1,15 @@
-#lang dracula/kernel
+#lang refined-acl2/kernel
 
 (provide
   mutual-recursion
   mutual-induction)
 
 (require
-  dracula/prelude/core
-  dracula/prelude/base/primitive
-  dracula/prelude/base/shorthand
-  dracula/prelude/base/match
-  dracula/prelude/base/struct)
+  refined-acl2/prelude/core
+  refined-acl2/prelude/base/primitive
+  refined-acl2/prelude/base/shorthand
+  refined-acl2/prelude/base/match
+  refined-acl2/prelude/base/struct)
 
 (begin-for-syntax
 

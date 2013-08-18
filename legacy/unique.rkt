@@ -4,11 +4,11 @@
   assign-unique-names)
 
 (require
-  dracula/legacy/type
-  dracula/expansion/grammar
-  dracula/legacy/registry
-  dracula/legacy/ref
-  dracula/proof/term)
+  refined-acl2/legacy/type
+  refined-acl2/expansion/grammar
+  refined-acl2/legacy/registry
+  refined-acl2/legacy/ref
+  refined-acl2/proof/term)
 
 (define (assign-unique-names x)
   (cond!
@@ -102,4 +102,4 @@
 
 (define symbol~>chosen?
   (make-hasheq
-    (make-alist dracula-package-imports #true)))
+    (make-alist refined-acl2-package-imports #true)))

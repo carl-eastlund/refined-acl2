@@ -1,4 +1,4 @@
-#lang dracula/core
+#lang refined-acl2/core
 
 (require/provide
 
@@ -67,13 +67,13 @@
     [(= number-inputs number-inputs)]
     [(< rational-inputs rational-inputs)])
 
-  (validated-primitive-in dracula/primitive
+  (validated-primitive-in refined-acl2/primitive
 
     ;; Special ACL2 functions:
     [(size sexp-inputs) #:symbol ACL2-COUNT]
     [(implies sexp-inputs sexp-inputs)])
 
-  (primitive-in dracula/primitive
+  (primitive-in refined-acl2/primitive
 
     ;; Error function, nothing to validate:
     [illegal 3]))

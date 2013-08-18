@@ -10,20 +10,20 @@
   (for-syntax
     mischief
     #;(prefix-in static:
-      dracula/proof/static)))
+      refined-acl2/proof/static)))
 
 (define (proof-dependencies . mod-paths)
   (for {[mod-path (in-list mod-paths)]}
     (dynamic-require mod-path (void)))
-  (dynamic-require 'dracula/proof/static (void))
+  (dynamic-require 'refined-acl2/proof/static (void))
   (eval
     #`(block
         (define-syntax (the-macro stx)
           (define static:all-modules-with-proofs
-            (dynamic-require 'dracula/proof/static
+            (dynamic-require 'refined-acl2/proof/static
               'all-modules-with-proofs))
           (define static:proof-dependencies
-            (dynamic-require 'dracula/proof/static
+            (dynamic-require 'refined-acl2/proof/static
               'proof-dependencies))
           (define/syntax-parse deps
             (quote-transformer
@@ -40,7 +40,7 @@
     #`(block
         (define-syntax (the-macro stx)
           (define static:module-path->proof-obligation
-            (dynamic-require 'dracula/proof/static
+            (dynamic-require 'refined-acl2/proof/static
               'module-path->proof-obligation))
           (define/syntax-parse pf
             (static:module-path->proof-obligation '#,mod-path))
@@ -50,7 +50,7 @@
 (define (write-program-obligations-to-file . mod-paths)
   (for {[mod-path (in-list mod-paths)]}
     (dynamic-require mod-path (void)))
-  (dynamic-require 'dracula/proof/static (void))
+  (dynamic-require 'refined-acl2/proof/static (void))
   (define/with-syntax [mod ...] (map quote-transformer mod-paths))
   (eval
     #'(block
@@ -58,10 +58,10 @@
 
           ;; workaround for sequencing bug:
           (define static:module-path->proof-obligation
-            (dynamic-require 'dracula/proof/static
+            (dynamic-require 'refined-acl2/proof/static
               'module-path->proof-obligation))
           (define static:write-program-obligations-to-file
-            (dynamic-require 'dracula/proof/static
+            (dynamic-require 'refined-acl2/proof/static
               'write-program-obligations-to-file))
 
           (for {[path (in-list (list mod ...))]}
@@ -79,7 +79,7 @@
     #'(block
         (define-syntax (the-macro stx)
           (define static:write-certification-script
-            (dynamic-require 'dracula/proof/static
+            (dynamic-require 'refined-acl2/proof/static
               'write-certification-script))
           (static:write-certification-script mod ...)
           #'(void))

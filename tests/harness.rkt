@@ -8,7 +8,7 @@
     mischief)
   rackunit
   racket/sandbox
-  dracula/expansion/paths
+  refined-acl2/expansion/paths
   "diff.rkt")
 
 (define mutual-recursion-regexps
@@ -58,18 +58,18 @@
   (book-path-without-extension
     (resolved-module-path-name
       (resolve-module-path
-        'dracula/base))))
+        'refined-acl2/base))))
 
 (define prelude-proof
   `[(,MUST-SUCCEED
       (,INCLUDE-BOOK ,prelude-book-name
         #:SKIP-PROOFS-OKP ,T))])
 
-(define (test-dracula
+(define (test-refined-acl2
           #:name [name (gensym 'anonymous-module)]
-          #:lang [lang 'dracula]
+          #:lang [lang 'refined-acl2]
           #:program [body-stxs #'()]
-          #:namespace [namespace dracula-namespace]
+          #:namespace [namespace refined-acl2-namespace]
           #:exports [exports '()]
           #:proof [proof '()]
           #:results [results '()]
@@ -79,18 +79,18 @@
     #:lang lang
     #:program body-stxs
     #:namespace namespace
-    #:compile (arg+ check-dracula-compile
+    #:compile (arg+ check-refined-acl2-compile
                 #:exports exports #:proof proof
-                #:execute (arg+ check-dracula-execute
+                #:execute (arg+ check-refined-acl2-execute
                             #:results results
                             #:exports exports
                             #:checks checks))))
 
-(define (test-dracula/expansion/runtime-error
+(define (test-refined-acl2/expansion/runtime-error
           #:name [name (gensym 'anonymous-module)]
-          #:lang [lang 'dracula/kernel]
+          #:lang [lang 'refined-acl2/kernel]
           #:program [body-stxs #'()]
-          #:namespace [namespace dracula-namespace]
+          #:namespace [namespace refined-acl2-namespace]
           #:exports [exports '()]
           #:proof [proof '()]
           #:error-message [error-message '()])
@@ -99,37 +99,37 @@
     #:lang lang
     #:program body-stxs
     #:namespace namespace
-    #:compile (arg+ check-dracula-compile
+    #:compile (arg+ check-refined-acl2-compile
                 #:exports exports #:proof proof
-                #:execute (arg+ check-dracula-runtime-error
+                #:execute (arg+ check-refined-acl2-runtime-error
                             #:error-message error-message))))
 
-(define (test-dracula/syntax-error
+(define (test-refined-acl2/syntax-error
           #:name [name (gensym 'anonymous-module)]
-          #:lang [lang 'dracula/kernel]
+          #:lang [lang 'refined-acl2/kernel]
           #:program [body-stxs #'()]
-          #:namespace [namespace dracula-namespace]
+          #:namespace [namespace refined-acl2-namespace]
           #:error-message [error-message '()])
   (test-program
     #:name name
     #:lang lang
     #:program body-stxs
     #:namespace namespace
-    #:compile (arg+ check-dracula-syntax-error
+    #:compile (arg+ check-refined-acl2-syntax-error
                 #:error-message error-message)))
 
-(define (check-dracula-compile name stx
+(define (check-refined-acl2-compile name stx
           #:exports [exports '()]
           #:proof [proof '()]
-          #:execute [execute check-dracula-execute])
+          #:execute [execute check-refined-acl2-execute])
   (check-not-exn
     (lambda ()
       (eval stx)))
-  (check-dracula-exports name exports)
-  (check-dracula-proof name proof)
+  (check-refined-acl2-exports name exports)
+  (check-refined-acl2-proof name proof)
   (execute name))
 
-(define (check-dracula-exports name expected)
+(define (check-refined-acl2-exports name expected)
   (check-not-exn
     (lambda ()
       (define actual
@@ -143,11 +143,11 @@
               #:unless (set-member? actual-set sym)}
           (fail (format "missing export: ~s" sym)))))))
 
-(define (check-dracula-proof name expected)
+(define (check-refined-acl2-proof name expected)
   (check-not-exn
     (lambda ()
       (define actual
-        (dynamic-dracula-proof
+        (dynamic-refined-acl2-proof
           (list 'quote name)))
       (define difference
         (diff expected actual))
@@ -157,7 +157,7 @@
         (for/first {[part (in-list difference)]}
           (fail (format "first difference: ~v" part)))))))
 
-(define (check-dracula-syntax-error name stx
+(define (check-refined-acl2-syntax-error name stx
           #:error-message [error-message '()])
   (define (error? x)
     (and (exn:fail:syntax? x)
@@ -167,7 +167,7 @@
     (lambda ()
       (eval stx))))
 
-(define (check-dracula-execute name
+(define (check-refined-acl2-execute name
           #:results [results '()]
           #:exports [exports '()]
           #:checks [checks void])
@@ -177,12 +177,12 @@
     (lambda ()
       (parameterize {[current-output-port port]}
         (dynamic-require (list 'quote name) #false))))
-  (check-dracula-results port results)
+  (check-refined-acl2-results port results)
   (apply checks
     (for/list {[sym (in-list exports)]}
       (dynamic-require (list 'quote name) sym))))
 
-(define (check-dracula-results port results)
+(define (check-refined-acl2-results port results)
   (define actual (get-output-string port))
   (define expected
     (with-output-to-string
@@ -193,7 +193,7 @@
                     ['actual-output actual]}
     (check-equal? actual expected)))
 
-(define (check-dracula-runtime-error name
+(define (check-refined-acl2-runtime-error name
           #:error-message [error-message '()])
   (define (error? x)
     (and (exn:fail? x)
@@ -242,7 +242,7 @@
     (lambda ()
       (dynamic-require (list 'quote name) #false))))
 
-(define dracula-namespace
+(define refined-acl2-namespace
   (make-base-namespace))
 
 (define (dynamic-quote-require mod-path [namespace (current-namespace)])
@@ -256,9 +256,9 @@
            (define ,sym (quote-require ,mod-path)))))
     (dynamic-require (list 'quote sym) sym)))
 
-(define (dynamic-dracula-proof mod-path [namespace (current-namespace)])
+(define (dynamic-refined-acl2-proof mod-path [namespace (current-namespace)])
   (parameterize {[current-namespace namespace]}
     ((dynamic-require
-       'dracula/proof/dynamic
+       'refined-acl2/proof/dynamic
        'module-path->proof-obligation)
      mod-path)))

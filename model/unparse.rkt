@@ -5,7 +5,7 @@
 
 (require
   (for-template
-    dracula/kernel))
+    refined-acl2/kernel))
 
 (define (make-refine-expr base-stx field-ids defn-stxs)
   (for/fold

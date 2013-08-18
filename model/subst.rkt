@@ -19,7 +19,7 @@
   subst)
 
 (require
-  dracula/model/data)
+  refined-acl2/model/data)
 
 (define (subst vars things)
   (for/hash {[v (in-list vars)]

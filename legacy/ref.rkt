@@ -11,9 +11,9 @@
     [renaming/c contract?]))
 
 (require
-  dracula/legacy/type
-  dracula/expansion/grammar
-  dracula/legacy/registry)
+  refined-acl2/legacy/type
+  refined-acl2/expansion/grammar
+  refined-acl2/legacy/registry)
 
 (define (ref->phrase ref)
   (format "~a ~a"

@@ -5,13 +5,13 @@
 (require
   rackunit
   mischief/preserve-expensive-metadata
-  dracula/tests/harness)
+  refined-acl2/tests/harness)
 
 (define component-tests
   (test-suite "component system"
 
-    (test-dracula #:name 'component-only
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'component-only
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {comp}
@@ -37,8 +37,8 @@
         (,DEFUN COMP.X0 () (,QUOTE 0))
         (,DEFUN Y () (COMP.F (COMP.X0)))])
 
-    (test-dracula #:name 'description-and-component
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'description-and-component
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {desc}
@@ -78,8 +78,8 @@
         (,DEFSTUB COMP.X0 () ,=> ,*)
         (,DEFUN Y () (COMP.F (COMP.X0)))])
 
-    (test-dracula #:name 'spliced-definitions
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'spliced-definitions
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {desc}
@@ -118,8 +118,8 @@
         (,DEFSTUB COMP.C () ,=> ,*)
         (,SKIP-PROOFS (,DEFUN COMP.B () (COMP.C)))])
 
-    (test-dracula/syntax-error #:name 'spliced-recursion
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'spliced-recursion
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {desc}
@@ -146,8 +146,8 @@
                    (#%plain-app values 'a a 'b b))))))])
       #:error-message mutual-recursion-regexps)
 
-    (test-dracula/syntax-error #:name 'mutually-recursive-components
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'mutually-recursive-components
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {a}
@@ -168,8 +168,8 @@
                  (#%plain-app values 'f f)))))])
       #:error-message mutual-recursion-regexps)
 
-    (test-dracula/syntax-error #:name 'mutually-recursive-generic/instance
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'mutually-recursive-generic/instance
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {g}
@@ -186,8 +186,8 @@
            (#%instantiate g))])
       #:error-message mutual-recursion-regexps)
 
-    (test-dracula/syntax-error #:name 'recursive-instance
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'recursive-instance
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {t}
@@ -206,16 +206,16 @@
            (#%plain-app #%instantiate g i))])
       #:error-message self-recursion-regexps)
 
-    (test-dracula/syntax-error #:name 'top-level-function-declaration
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'top-level-function-declaration
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {f}
            (#%plain-lambda {} '#:stub '0))])
       #:error-message decl-as-defn-regexps)
 
-    (test-dracula/syntax-error #:name 'bad-implementation-of-description
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'bad-implementation-of-description
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {t}
@@ -237,8 +237,8 @@
                    (#%plain-app values 'f f))))))])
       #:error-message (wrong-arity-regexps #:expected 1 #:actual 2))
 
-    (test-dracula #:name 'description-refinement
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'description-refinement
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {t}
@@ -292,8 +292,8 @@
         (,DEFUN Y ()
           (I.G (X)))])
 
-    (test-dracula/syntax-error #:name 'bad-description-refinement
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'bad-description-refinement
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {t}
@@ -314,8 +314,8 @@
                    (#%plain-app values 'f f))))))])
       #:error-message (wrong-arity-regexps #:expected 2 #:actual 1))
 
-    (test-dracula/syntax-error #:name 'label-for-external-definition
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'label-for-external-definition
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {ident}
@@ -329,8 +329,8 @@
         #px"label|member|define|definition"
         #px"ident"])
 
-    (test-dracula #:name 'nested-component
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'nested-component
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {outer}
@@ -362,8 +362,8 @@
       `[(,DEFUN OUTER.INNER.F () (,QUOTE 2))
         (,DEFUN TWO () (OUTER.INNER.F))])
 
-    (test-dracula #:name 'nested-component-type
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'nested-component-type
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {flat}
@@ -418,8 +418,8 @@
         (,DEFSTUB OUTER.INNER.F () ,=> ,*)
         (,DEFUN ONE () (OUTER.INNER.F))])
 
-    (test-dracula #:name 'description-in-description
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'description-in-description
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {outer}
@@ -433,8 +433,8 @@
                          (#%plain-app values)))])
                    (#%plain-app values 'inner inner))))))]))
 
-    (test-dracula #:name 'description-in-description-in-description
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'description-in-description-in-description
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {outer}
@@ -453,8 +453,8 @@
                            (#%plain-app values 'inner inner))))])
                    (#%plain-app values 'middle middle))))))]))
 
-    (test-dracula #:name 'refined-component
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'refined-component
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {simple}
@@ -501,8 +501,8 @@
       `[(,DEFUN SIMPLE.F () (,QUOTE -1))
         (,DEFUN F () (SIMPLE.F))])
 
-    (test-dracula #:name 'simple-generic
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'simple-generic
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {domain}
@@ -555,8 +555,8 @@
               (,QUOTE yes)
               (,QUOTE no))))])
 
-    (test-dracula #:name 'generic-with-refinement
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'generic-with-refinement
+      #:lang 'refined-acl2/kernel
 
       #:program
       (quote-syntax/preserve-expensive-metadata
@@ -645,8 +645,8 @@
         (,DEFUN FINNIF () (FIVE/SIX.X))
         (,DEFUN FINALLY () (FLOP.Y))])
 
-    (test-dracula #:name 'generic-declaration
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'generic-declaration
+      #:lang 'refined-acl2/kernel
 
       #:program
       (quote-syntax/preserve-expensive-metadata
@@ -738,8 +738,8 @@
         (,DEFUN F () (ZERO.F))
         (,DEFUN G () (TWO*ZERO.G))])
 
-    (test-dracula #:name 'theorem-declaration
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'theorem-declaration
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {t}
@@ -796,8 +796,8 @@
             #:RULE-CLASSES
             ((#:REWRITE))))])
 
-    (test-dracula/syntax-error #:name 'theorem-rule-class-mismatch
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'theorem-rule-class-mismatch
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {t}
@@ -828,8 +828,8 @@
       #:error-message
       '[#px"rule class"])
 
-    (test-dracula/syntax-error #:name 'theorem-body-mismatch
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'theorem-body-mismatch
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {t}
@@ -860,8 +860,8 @@
         #px"body|bodies"
         #px"mismatch"])
 
-    (test-dracula #:name 'generics-with-where-clauses
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'generics-with-where-clauses
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {ONE}

@@ -6,7 +6,7 @@
   (list
     (list
       "certify"
-      '(submod dracula/certify main)
+      '(submod refined-acl2/certify main)
       "certify Dracula modules using ACL2"
       #false)))
 

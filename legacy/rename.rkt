@@ -11,9 +11,9 @@
        (dict/c identifier? type?))]))
 
 (require
-  dracula/legacy/ref
-  dracula/expansion/grammar
-  dracula/legacy/type)
+  refined-acl2/legacy/ref
+  refined-acl2/expansion/grammar
+  refined-acl2/legacy/type)
 
 (define (rename-type ty renaming)
   (define ref (rename-ref (type-ref ty) renaming))

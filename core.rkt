@@ -1,3 +1,3 @@
-#lang dracula/kernel
-(module reader syntax/module-reader dracula/core)
-(require/provide dracula/kernel dracula/prelude/core)
+#lang refined-acl2/kernel
+(module reader syntax/module-reader refined-acl2/core)
+(require/provide refined-acl2/kernel refined-acl2/prelude/core)

@@ -4,14 +4,14 @@
   check-program!)
 
 (require
-  dracula/legacy/type
-  dracula/expansion/grammar
-  dracula/legacy/registry
-  dracula/expansion/names
-  dracula/legacy/ref
-  dracula/proof/term
-  dracula/legacy/rename
-  dracula/expansion/alpha
+  refined-acl2/legacy/type
+  refined-acl2/expansion/grammar
+  refined-acl2/legacy/registry
+  refined-acl2/expansion/names
+  refined-acl2/legacy/ref
+  refined-acl2/proof/term
+  refined-acl2/legacy/rename
+  refined-acl2/expansion/alpha
   macro-debugger/emit)
 
 (define (check-program! stxs)

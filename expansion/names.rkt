@@ -6,7 +6,7 @@
   defn-names)
 
 (require
-  dracula/expansion/grammar)
+  refined-acl2/expansion/grammar)
 
 (define (program-names stxs)
   (defns-names stxs))

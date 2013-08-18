@@ -10,7 +10,7 @@
   expr-dependencies)
 
 (require
-  dracula/expansion/grammar)
+  refined-acl2/expansion/grammar)
 
 ;; Note: bindings cannot overlap.
 (define (defns-bindings defns)

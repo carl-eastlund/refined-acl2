@@ -1,4 +1,4 @@
-#lang dracula/kernel
+#lang refined-acl2/kernel
 
 (provide
   define
@@ -18,13 +18,13 @@
 
 (require/provide
   (for-syntax
-    dracula/prelude/core/input-streams))
+    refined-acl2/prelude/core/input-streams))
 
 (require
   (for-syntax mischief)
-  dracula/prelude/core/keywords
-  dracula/prelude/core/imported
-  dracula/prelude/core/support)
+  refined-acl2/prelude/core/keywords
+  refined-acl2/prelude/core/imported
+  refined-acl2/prelude/core/support)
 
 (define-syntax (assert stx)
   (syntax-parse stx

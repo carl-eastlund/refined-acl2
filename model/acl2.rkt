@@ -4,9 +4,9 @@
   proof->acl2)
 
 (require
-  dracula/model/data
-  dracula/model/subst
-  dracula/proof/term)
+  refined-acl2/model/data
+  refined-acl2/model/subst
+  refined-acl2/proof/term)
 
 (define (proof->acl2 defns0)
   (define defns (simplify-defns defns0))
@@ -285,7 +285,7 @@
 (define (fresh-symbol-table) (make-hash))
 
 (define the-base-env
-  (for/hasheq {[sym (in-list dracula-package-imports)]}
+  (for/hasheq {[sym (in-list refined-acl2-package-imports)]}
     (values sym (prefab ':: 'ACL2 sym))))
 
 (define (base-env) the-base-env)

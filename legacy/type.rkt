@@ -1,14 +1,14 @@
 #lang mischief
 
 (require/provide
-  dracula/legacy/type/base
-  dracula/legacy/type/value
-  dracula/legacy/type/function
-  dracula/legacy/type/theorem
-  dracula/legacy/type/field
-  dracula/legacy/type/description
-  dracula/legacy/type/component
-  dracula/legacy/type/generic)
+  refined-acl2/legacy/type/base
+  refined-acl2/legacy/type/value
+  refined-acl2/legacy/type/function
+  refined-acl2/legacy/type/theorem
+  refined-acl2/legacy/type/field
+  refined-acl2/legacy/type/description
+  refined-acl2/legacy/type/component
+  refined-acl2/legacy/type/generic)
 
 (provide
   (contract-out

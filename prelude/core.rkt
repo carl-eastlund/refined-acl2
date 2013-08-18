@@ -1,9 +1,9 @@
-#lang dracula/kernel
+#lang refined-acl2/kernel
 
 (require/provide
-  dracula/prelude/core/expressions
-  dracula/prelude/core/imported
-  dracula/prelude/core/keywords
-  dracula/prelude/core/description
-  dracula/prelude/core/component
-  dracula/prelude/core/atomic)
+  refined-acl2/prelude/core/expressions
+  refined-acl2/prelude/core/imported
+  refined-acl2/prelude/core/keywords
+  refined-acl2/prelude/core/description
+  refined-acl2/prelude/core/component
+  refined-acl2/prelude/core/atomic)

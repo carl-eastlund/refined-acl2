@@ -1,8 +1,8 @@
-#lang dracula/base
+#lang refined-acl2/base
 
-(module reader syntax/module-reader dracula)
+(module reader syntax/module-reader refined-acl2)
 
-(#%require dracula/prelude)
+(#%require refined-acl2/prelude)
 (#%provide
-  (all-from dracula/base)
-  (all-from dracula/prelude))
+  (all-from refined-acl2/base)
+  (all-from refined-acl2/prelude))

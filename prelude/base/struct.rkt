@@ -1,4 +1,4 @@
-#lang dracula/kernel
+#lang refined-acl2/kernel
 
 (provide
   ~structs
@@ -10,10 +10,10 @@
   get-struct-field)
 
 (require
-  dracula/prelude/core
-  dracula/prelude/base/primitive
-  dracula/prelude/base/shorthand
-  dracula/prelude/base/match
+  refined-acl2/prelude/core
+  refined-acl2/prelude/base/primitive
+  refined-acl2/prelude/base/shorthand
+  refined-acl2/prelude/base/match
   (for-syntax
     mischief))
 

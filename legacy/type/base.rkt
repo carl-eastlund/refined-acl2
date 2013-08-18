@@ -5,7 +5,7 @@
   ref?)
 
 (require
-  dracula/proof/term)
+  refined-acl2/proof/term)
 
 (struct type [ref] #:transparent)
 

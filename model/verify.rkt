@@ -5,10 +5,10 @@
   verify-dependency)
 
 (require
-  dracula/proof/term
-  dracula/expansion/paths
-  dracula/model/data
-  dracula/model/subst
+  refined-acl2/proof/term
+  refined-acl2/expansion/paths
+  refined-acl2/model/data
+  refined-acl2/model/subst
   (for-syntax mischief))
 
 (define (verify-dependency dep)

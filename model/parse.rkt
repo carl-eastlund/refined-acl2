@@ -6,13 +6,13 @@
   (for-syntax
     mischief)
   mischief/kernel-syntax
-  dracula/model/data
-  dracula/model/subst
-  dracula/model/names
+  refined-acl2/model/data
+  refined-acl2/model/subst
+  refined-acl2/model/names
   unstable/list
   (for-template
     racket/base
-    dracula/expansion/runtime))
+    refined-acl2/expansion/runtime))
 
 (define (parse-program stxs)
   (program

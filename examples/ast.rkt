@@ -1,4 +1,4 @@
-#lang dracula
+#lang refined-acl2
 
 (datatype ast
   [expr

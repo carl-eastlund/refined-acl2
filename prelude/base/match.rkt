@@ -1,4 +1,4 @@
-#lang dracula/kernel
+#lang refined-acl2/kernel
 
 (provide
   ? _ ...
@@ -10,9 +10,9 @@
 
 (require
   (for-syntax mischief macro-debugger/emit)
-  dracula/prelude/core
-  dracula/prelude/base/primitive
-  dracula/prelude/base/shorthand)
+  refined-acl2/prelude/core
+  refined-acl2/prelude/base/primitive
+  refined-acl2/prelude/base/shorthand)
 
 (begin-for-syntax
 

@@ -5,22 +5,22 @@
 (require
   rackunit
   mischief/preserve-expensive-metadata
-  dracula/tests/harness)
+  refined-acl2/tests/harness)
 
 (define atomic-tests
   (test-suite "expressions and atomic definitions"
 
-    (test-dracula #:name 'empty-program
-      #:lang 'dracula/kernel)
+    (test-refined-acl2 #:name 'empty-program
+      #:lang 'refined-acl2/kernel)
 
-    (test-dracula/syntax-error #:name 'toplevel-keyword
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'toplevel-keyword
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [#:illegal]))
 
-    (test-dracula #:name 'fully-expanded-expressions
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'fully-expanded-expressions
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         ['value
@@ -28,8 +28,8 @@
          (let-values {[(x) 'y]} x)])
       #:results (list 'value 'b 'y))
 
-    (test-dracula #:name 'fully-expanded-value-definitions
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'fully-expanded-value-definitions
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {v1}
@@ -71,8 +71,8 @@
           (,IF (,QUOTE a) (V1) (V2)))
         (,DEFUN V4 () (,LET ((X (V2))) X))])
 
-    (test-dracula #:name 'fully-expanded-function-definitions
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'fully-expanded-function-definitions
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {neg}
@@ -120,8 +120,8 @@
         (,DEFUN DISJ (A B)
           (NEG (CONJ (NEG A) (NEG B))))])
 
-    (test-dracula #:name 'explicit-measure
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'explicit-measure
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {f}
@@ -138,8 +138,8 @@
               (,QUOTE 1)))
           X)])
 
-    (test-dracula #:name 'successful-assertion
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'successful-assertion
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {}
@@ -148,8 +148,8 @@
       #:proof
       `[(,ASSERT-EVENT (,QUOTE success))])
 
-    (test-dracula/expansion/runtime-error #:name 'failed-assertion
-      #:lang 'dracula/kernel
+    (test-refined-acl2/expansion/runtime-error #:name 'failed-assertion
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {}
@@ -159,8 +159,8 @@
       `[(,ASSERT-EVENT (,QUOTE ,NIL))]
       #:error-message '[#px"(?i:fail)"])
 
-    (test-dracula/expansion/runtime-error #:name 'failed-assertion-with-source
-      #:lang 'dracula/kernel
+    (test-refined-acl2/expansion/runtime-error #:name 'failed-assertion-with-source
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {}
@@ -171,8 +171,8 @@
       #:error-message
       (list #px"(?i:fail)" (regexp-quote "(assert false)")))
 
-    (test-dracula #:name 'in-theory
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'in-theory
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {f}
@@ -196,8 +196,8 @@
         (,IN-THEORY
           (,ENABLE F))])
 
-    (test-dracula #:name 'include-book
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'include-book
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {}
@@ -207,8 +207,8 @@
       #:proof
       `[(,INCLUDE-BOOK "arithmetic-5/top" #:DIR #:SYSTEM)])
 
-    (test-dracula #:name 'fully-expanded-theorem-definitions
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'fully-expanded-theorem-definitions
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {claim}
@@ -223,8 +223,8 @@
             (,QUOTE ,T)
             (,QUOTE ,T)))])
 
-    (test-dracula #:name 'theorem-with-rule-classes
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'theorem-with-rule-classes
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {f}
@@ -317,8 +317,8 @@
                            (,QUOTE ,NIL)
                            (,QUOTE ,T))))))])
 
-    (test-dracula #:name 'theorem-with-hints
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'theorem-with-hints
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {claim}
@@ -358,8 +358,8 @@
                        (,QUOTE ,T)))))])
 
     (test-suite "arity errors"
-      (test-dracula/syntax-error #:name '1-vs-2
-        #:lang 'dracula/kernel
+      (test-refined-acl2/syntax-error #:name '1-vs-2
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(define-values {f}
@@ -370,8 +370,8 @@
                x))
            (#%plain-app f '1 '2)])
         #:error-message '[#px"argument|arity"])
-      (test-dracula/syntax-error #:name '2-vs-1
-        #:lang 'dracula/kernel
+      (test-refined-acl2/syntax-error #:name '2-vs-1
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(define-values {f}
@@ -384,8 +384,8 @@
         #:error-message '[#px"argument|arity"]))
 
     (test-suite "value vs. function errors"
-      (test-dracula/syntax-error #:name 'value-as-function
-        #:lang 'dracula/kernel
+      (test-refined-acl2/syntax-error #:name 'value-as-function
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(define-values {f}
@@ -395,8 +395,8 @@
                '#:no-goals
                (#%plain-app x)))])
         #:error-message '[#px"expected a function"])
-      (test-dracula/syntax-error #:name 'function-as-value
-        #:lang 'dracula/kernel
+      (test-refined-acl2/syntax-error #:name 'function-as-value
+        #:lang 'refined-acl2/kernel
         #:program
         (quote-syntax/preserve-expensive-metadata
           [(define-values {f}
@@ -407,8 +407,8 @@
                f))])
         #:error-message '[#px"expected a value"]))
 
-    (test-dracula #:name 'unquoted-literals
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'unquoted-literals
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {one}
@@ -425,16 +425,16 @@
       `[(,DEFUN ONE () (,QUOTE 1))
         (,DEFUN FALSE () (,QUOTE ,NIL))])
 
-    (test-dracula/syntax-error #:name 'unquoted-keywords
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'unquoted-keywords
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-syntaxes {bad}
            (lambda (stx) #'#:bad))
          (if (bad) #true #false)]))
 
-    (test-dracula #:name 'function-application-without-call-form
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'function-application-without-call-form
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {f}
@@ -448,8 +448,8 @@
       `[(,DEFUN F (X) X)
         (,DEFUN Y () (F (,QUOTE 1)))])
 
-    (test-dracula #:name 'primitives
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'primitives
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(#%require (only racket/base cons car cdr pair?))
@@ -509,8 +509,8 @@
               (MIRROR (,CAR X)))
             X))])
 
-    (test-dracula/expansion/runtime-error #:name 'improper-empty?
-      #:lang 'dracula/kernel
+    (test-refined-acl2/expansion/runtime-error #:name 'improper-empty?
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(#%require racket/list)
@@ -527,8 +527,8 @@
               (,QUOTE 1))))]
       #:error-message '[#px"5" #px"first" #px"list"])
 
-    (test-dracula #:name 'reordered-value-definitions
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'reordered-value-definitions
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {x}
@@ -549,8 +549,8 @@
         (,DEFUN Y () (Z))
         (,DEFUN X () (Y))])
 
-    (test-dracula #:name 'nested-begin
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'nested-begin
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(begin
@@ -569,8 +569,8 @@
       `[(,DEFUN X () (,QUOTE 1))
         (,DEFUN Y () (,QUOTE 2))])
 
-    (test-dracula/syntax-error #:name 'mutually-recursive-functions
-      #:lang 'dracula/kernel
+    (test-refined-acl2/syntax-error #:name 'mutually-recursive-functions
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-values {f}
@@ -581,8 +581,8 @@
              (#%plain-app f)))])
       #:error-message mutual-recursion-regexps)
 
-    (test-dracula #:name 'expression-macro
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'expression-macro
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-syntaxes {or}
@@ -606,8 +606,8 @@
                   X.3
                   (,QUOTE ,T))))))])
 
-    (test-dracula #:name 'definition-macro
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'definition-macro
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-syntaxes {define}
@@ -636,8 +636,8 @@
           (,IF X Y (,QUOTE ,NIL)))
         (,DEFUN X () (,QUOTE 7))])
 
-    (test-dracula #:name 'higher-order-macro
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'higher-order-macro
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-syntaxes {define-associative}
@@ -674,8 +674,8 @@
               (,BINARY-+ (,QUOTE 3)
                 (,QUOTE 0)))))])
 
-    (test-dracula #:name 'macro-with-literals
-      #:lang 'dracula/kernel
+    (test-refined-acl2 #:name 'macro-with-literals
+      #:lang 'refined-acl2/kernel
       #:program
       (quote-syntax/preserve-expensive-metadata
         [(define-syntaxes {same}

@@ -5,7 +5,7 @@
   (for-template racket/base))
 
 (require/define-literals/ids runtime
-  (for-template dracula/expansion/runtime))
+  (for-template refined-acl2/expansion/runtime))
 
 (define-syntax (define/provide-pattern stx)
   (syntax-parse stx

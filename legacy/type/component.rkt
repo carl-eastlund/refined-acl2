@@ -1,8 +1,8 @@
 #lang mischief
 
 (require
-  dracula/legacy/type/base
-  dracula/legacy/type/description)
+  refined-acl2/legacy/type/base
+  refined-acl2/legacy/type/description)
 
 (struct component-type type [description field~>type] #:transparent)
 

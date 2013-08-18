@@ -5,10 +5,10 @@
 
 (require
   macro-debugger/emit
-  dracula/model/unparse
+  refined-acl2/model/unparse
   (for-template
-    dracula/kernel
-    dracula/prelude/core/keywords))
+    refined-acl2/kernel
+    refined-acl2/prelude/core/keywords))
 
 (define (symbol-update sym0 sym)
   (define str (symbol->string sym))

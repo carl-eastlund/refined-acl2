@@ -1,11 +1,11 @@
-#lang dracula/base
+#lang refined-acl2/base
 
 (provide
   (all-defined-out))
 
 (require
-  dracula/prelude/sexp
-  dracula/prelude/type)
+  refined-acl2/prelude/sexp
+  refined-acl2/prelude/type)
 
 (define (set? xs)
   (cond

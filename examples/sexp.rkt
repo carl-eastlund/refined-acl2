@@ -1,4 +1,4 @@
-#lang dracula
+#lang refined-acl2
 
 (mutual-recursion sexp
 

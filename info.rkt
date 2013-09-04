@@ -14,4 +14,4 @@
 
 (define collection "refined-acl2")
 
-(define deps '[mischief])
+(define deps '["mischief"])

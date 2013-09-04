@@ -11,3 +11,7 @@
       #false)))
 
 (define compile-omit-paths '("legacy" "examples"))
+
+(define collection "refined-acl2")
+
+(define deps '[mischief])

@@ -20,8 +20,13 @@
 
 (define (metadata-path path extension . subs)
   (define-values {base name dir?} (split-path path))
+  (define base-path
+    (match base
+      [#f (build-path "/")]
+      ['relative (current-directory)]
+      [(? path? p) p]))
   (path->string
-    (apply get-metadata-path base
+    (apply get-metadata-path base-path
       (append subs (list (path-add-suffix name extension))))))
 
 (define (path-remove-extension path)

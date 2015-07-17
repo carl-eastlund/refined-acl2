@@ -9,7 +9,7 @@
   refined-acl2/model/data
   refined-acl2/model/subst
   refined-acl2/model/names
-  unstable/list
+  (only-in racket/list check-duplicates)
   (for-template
     racket/base
     refined-acl2/expansion/runtime))
@@ -511,7 +511,7 @@
     #:literal-sets {kernel-literals}
     [(#%plain-lambda {} :instance-body)
      #:fail-when
-     (check-duplicate (@ label) #:key syntax-e)
+     (check-duplicates (@ label) #:key syntax-e)
      "duplicate label"
      #:fail-when
      (check-duplicate-identifier (@ name))

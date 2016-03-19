@@ -126,7 +126,7 @@
   (for-syntax
     mischief)
   refined-acl2/proof/term
-  unstable/list)
+  (only-in racket/list check-duplicates))
 
 (struct ast [source] #:transparent)
 
@@ -275,7 +275,7 @@
 (define (environment-union . es)
   (define decls (append-map environment-decls es))
   (cond
-    [(check-duplicate (map decl-name decls)) =>
+    [(check-duplicates (map decl-name decls)) =>
      (lambda {v}
        (error 'environment-union
          "duplicate declaration for ~a"
